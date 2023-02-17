@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'One_click_pick.wsgi.application'
+AUTH_USER_MODEL = 'user.User'
 
 
 # Database
@@ -75,8 +77,11 @@ WSGI_APPLICATION = 'One_click_pick.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'One_click_pick',
+        'USER' : 'postgres',
+        'PASSWORD' : 'param5040',
+        'HOST' : 'localhost',
     }
 }
 
