@@ -9,27 +9,26 @@
 </head>
 <body>
   <div class="container">
-    <input type="checkbox" id="check">
+    {% comment %} <input type="checkbox" id="check"> {% endcomment %}
     <div class="login form">
-      <header>Sign up</header>
+      <header>Login
+        {{message}}
+      </header>
       <form action="#" method="POST">
         {% csrf_token %}
-        {{form.as_p}}
-        {% comment %} {{form.first_name}}
-        {{form.last_name}}
-        {{form.email}}
-        {{form.password1|striptags}}
-        {{form.password2|striptags}} {% endcomment %}
-        {% comment %} {{form.first_name}} {% endcomment %}
+        <input type="email" name="email" placeholder="Enter your email">
+        <input type="password" name = "password" placeholder="Enter password">
         <a href="#">Forgot password?</a>
-        <input type="submit" class="button" value="sign up">
+        <input type="submit" class="button" value="Login">
       </form>
       {% comment %} <div class="signup"> {% endcomment %}
-        <span class="signup">Already have an account?
-         <a href="{% url 'customer_login'%}">login</a>
+        <span class="signup">Don't have an account?
+         <a href="{% url 'customer_register'%}">Signup</a>
         </span>
+        <p>{{request.user}}</p>
+        <a href="{% url 'logout' %}" type="submit" class="button">logout</a>
       {% comment %} </div> {% endcomment %}
-    </div> 
+    </div>
   </div>
 </body>
 </html>

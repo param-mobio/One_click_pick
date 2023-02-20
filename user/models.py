@@ -15,9 +15,13 @@ class User(AbstractUser):
     updated_at=models.DateTimeField(auto_now=True)
     created_by=models.CharField(max_length=200, null=True,blank=True)
     update_by=models.CharField(max_length=200, null=True,blank=True)
+
     
     
     REQUIRED_FIELDS =[]
     USERNAME_FIELD = 'email'
 
     objects = UserManager()
+
+    def __str__(self):
+        return self.email
