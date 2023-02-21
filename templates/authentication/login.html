@@ -23,9 +23,9 @@
       </form>
       {% comment %} <div class="signup"> {% endcomment %}
         <span class="signup">Don't have an account?
-         <a href="{% url 'customer_register'%}">Signup</a>
+         <a href="{% url 'customer_register'%}">Signup as cutomer</a>
+         <a href="{% url 'productAdminRegister'%}">Signup as product_admin</a>
         </span>
-        <p>{{request.user}}</p>
         <a href="{% url 'logout' %}" type="submit" class="button">logout</a>
       {% comment %} </div> {% endcomment %}
     </div>

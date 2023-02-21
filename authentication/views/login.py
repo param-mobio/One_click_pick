@@ -10,7 +10,7 @@ from django.contrib.auth import login,authenticate
 from django.contrib.auth.hashers import make_password, check_password
 
 class Login(View):
-    template_name = 'authentication/customer_login.html'
+    template_name = 'authentication/login.html'
     # form_class = Loginform
     def get(self,request):
         # form = self.form_class()
