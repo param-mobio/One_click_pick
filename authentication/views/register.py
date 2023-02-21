@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView,FormView
 from authentication.forms import Registerform
 from django.views import View
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.models import Group
 
 
 class Register(CreateView):
@@ -18,6 +19,7 @@ class Register(CreateView):
         }
         return render(request, 'authentication/customer_register.html', context)
     def post(self,request):
+        
         form=Registerform(request.POST)
         if form.is_valid():
             password=form.cleaned_data.get('confirm_password')
@@ -34,7 +36,12 @@ class Register(CreateView):
         context = {
             'form' : form
         }
+        
         return render(request, 'authentication/customer_register.html', context)
+    
+# class Register_product_admin(CreateView):
+#     def get(self,)
+
 
 
     
