@@ -33,10 +33,18 @@ class Registerform(ModelForm):
             if(i=='@' or i=='#' or i=='%' or i=='&'):
                 raise forms.ValidationError('last name contains only alphabet')
         return last_name
-            
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user = User.objects.filter(email=email).exists()
+        print(user)
+        if(user):
+            raise forms.ValidationError('email is already exists')        
+        return email
+    
     def clean_password(self):
         password = self.cleaned_data['password']
-        print('pasword',password)
+        # print('pasword',password)
         # confirm_password = self.cleaned_data['confirm_password']
         # print('conpassword',confirm_password)
         if(len(password)<8):

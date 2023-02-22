@@ -8,14 +8,16 @@ from authentication.forms import Registerform
 from django.views import View
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import Group
+from authentication.helpers import send_verification_otp
+from django.urls import reverse
+import math
+import random
 
 
 class Register(CreateView):
     
     def get(self,request):
         form = Registerform()
-        Groups = Group.objects.all()
-        print(Groups)
         context = {
             'form': form,
         }
@@ -38,10 +40,24 @@ class Register(CreateView):
                 password = make_password(password),
                 
             )
-            user.groups.add(groups) 
-
-            
-            return redirect('customer_login')
+            user.groups.add(groups)
+            digits = "0123456789"
+            otp = ""
+            i=0
+            for i in range(4): 
+                otp+=digits[math.floor(random.random()*10)]
+            otps = int(otp)
+            user.otp = otps
+            user.save()
+            print(user.email)
+            send_verification_otp(email, otps)
+            value ={
+                'email' : email,
+                'otp' : otp
+            }
+            print('************')
+            # return redirect('registrationOtp')   
+            return render(request,'authentication/otp.html',value)   
         context = {
             'form' : form
         }

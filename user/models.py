@@ -12,6 +12,8 @@ class User(AbstractUser):
     address=models.TextField(max_length=200,null=True,blank=True)
     profile=models.ImageField(null=True, blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
+    otp=models.IntegerField(null=True)
+    is_active=models.BooleanField(default=False)
     updated_at=models.DateTimeField(auto_now=True)
     created_by=models.CharField(max_length=200, null=True,blank=True)
     update_by=models.CharField(max_length=200, null=True,blank=True)
