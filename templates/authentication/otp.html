@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +14,13 @@
     <input type="checkbox" id="check">
     <div class="login form">
       <header>OTP verification</header>
-      
-      {% comment %} {% if  %}{% endif %} {% endcomment %}
         <form action="{% url 'registrationOtp' %}" method="POST">
           {% csrf_token %}
            <input type="hidden" name="email" value="{{email}}">
            <input type="hidden" name="realotp" value="{{otp}}">
-           {% comment %} <label for="otp" name="otp">OTP</label> {% endcomment %}
-           <input type="number" placeholder="OTP", name="otp" required>
-           <input type="submit" class="button" value="submit">
+           <input type="number" placeholder="OTP", name="otp" >
+           <input type="submit" class="button" value="submit" name="submit">
+           <input type="submit" class="btn btn-danger btn-sm" name="resendotp" value="resendotp">
         </form>
         {% if error_message %}
         <div class="alert alert-danger alert-dismissible" role="alert">

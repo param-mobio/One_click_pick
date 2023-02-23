@@ -46,11 +46,11 @@ class Register(CreateView):
             i=0
             for i in range(4): 
                 otp+=digits[math.floor(random.random()*10)]
-            otps = int(otp)
-            user.otp = otps
+            otp = int(otp)
+            user.otp = otp
             user.save()
             print(user.email)
-            send_verification_otp(email, otps)
+            send_verification_otp(email, otp)
             value ={
                 'email' : email,
                 'otp' : otp
