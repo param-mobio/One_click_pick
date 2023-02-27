@@ -21,7 +21,7 @@ class Register(CreateView):
         context = {
             'form': form,
         }
-        return render(request, 'authentication/customer_register.html', context)
+        return render(request, 'account/signup.html', context)
     def post(self,request):
         
         form=Registerform(request.POST)
@@ -57,12 +57,12 @@ class Register(CreateView):
             }
             print('************')
             # return redirect('registrationOtp')   
-            return render(request,'authentication/otp.html',value)   
+            return render(request,'account/otp.html',value)   
         context = {
             'form' : form
         }
         
-        return render(request, 'authentication/customer_register.html', context)
+        return render(request, 'account/signup.html', context)
     
 class ProductadminRegister(CreateView):
     
@@ -73,7 +73,7 @@ class ProductadminRegister(CreateView):
         context = {
             'form': form,
         }
-        return render(request, 'authentication/productAdmin_register.html', context)
+        return render(request, 'account/signup.html', context)
     def post(self,request):
         
         form=Registerform(request.POST)
@@ -100,7 +100,7 @@ class ProductadminRegister(CreateView):
             'form' : form
         }
         
-        return render(request, 'authentication/productAdmin_register.html', context)
+        return render(request, 'account/productAdmin_register.html', context)
 
 
 

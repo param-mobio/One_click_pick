@@ -10,7 +10,7 @@ import random
 class Otp(View):
     def get(self,request):
         
-        return render(request,'authentication/otp.html')
+        return render(request,'account/otp.html')
     
     def post(self,request):
         otp = request.POST.get('otp')
@@ -39,13 +39,13 @@ class Otp(View):
             'otp' : otp,
             'email' : email,
             }
-            return render(request,'authentication/otp.html',context)
+            return render(request,'account/otp.html',context)
         error_message = 'Email has been sent'
         context = {  
             'error_message':error_message,
             'otp' : otp,
             'email' : email,
         }
-        return render(request,'authentication/otp.html',context)
+        return render(request,'account/otp.html',context)
         
 

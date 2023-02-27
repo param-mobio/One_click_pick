@@ -10,7 +10,7 @@ from django.contrib.auth import login,authenticate
 from django.contrib.auth.hashers import make_password, check_password
 
 class Login(View):
-    template_name = 'authentication/login.html'
+    template_name = 'account/login.html'
     # form_class = Loginform
     def get(self,request):
         # form = self.form_class()
@@ -23,7 +23,7 @@ class Login(View):
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email=email)
             if check_password(password,user.password):
-                login(request,user)
+                login(request,user,backend='django.contrib.auth.backends.ModelBackend')
                 return redirect('profile')
             else:
                 message = 'password is wrong'
@@ -33,4 +33,4 @@ class Login(View):
     
 class Profile(View):
     def get(self,request):
-        return render(request,'authentication/profile.html')
+        return render(request,'account/profile.html')

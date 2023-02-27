@@ -20,5 +20,7 @@ from authentication.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('authentication/',include("authentication.urls"))
+    path('account/',include("authentication.urls")),
+    path('accounts/', include('allauth.urls')),
+    # path('social-auth',include('social_django.urls',namespace='social'))
 ]
