@@ -13,6 +13,7 @@ class User(AbstractUser):
     profile=models.ImageField(null=True, blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     otp=models.IntegerField(null=True,blank=True)
+    forget_password_token = models.CharField(max_length=100,null=True,blank=True)
     is_active=models.BooleanField(default=True)
     updated_at=models.DateTimeField(auto_now=True)
     created_by=models.CharField(max_length=200, null=True,blank=True)

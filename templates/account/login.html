@@ -9,11 +9,11 @@
   <header>Login
     {{message}}
   </header>
-  <form class="login" method="POST" action="{% url 'account_login' %}">
+  <form method="POST">
     {% csrf_token %}
     <input type="email" name="email" placeholder="Enter your email">
     <input type="password" name = "password" placeholder="Enter password">
-    <a href="#">Forgot password?</a>
+    <a href="{% url 'forgetpassword' %}">Forgot password?</a>
     <input type="submit" class="button" value="Login">
   </form>
   <div>
