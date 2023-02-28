@@ -13,11 +13,8 @@ class Login(View):
     template_name = 'authentication/login.html'
     # form_class = Loginform
     def get(self,request):
-        # form = self.form_class()
-        message = ''
-        return render(request, self.template_name, context={'message': message})
+        return render(request, self.template_name)
     def post(self,request):
-        print('************')
         email = request.POST.get('email')
         password = request.POST.get('password')
         if User.objects.filter(email=email).exists():
