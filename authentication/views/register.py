@@ -6,13 +6,14 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView,FormView
 from authentication.forms import Registerform
 from django.views import View
+from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import Group
 from authentication.helpers import send_verification_otp
 from django.urls import reverse
+from authentication.views.otp import generate_otp
 import math
 import random
-
 
 class Register(CreateView):
     
@@ -21,7 +22,7 @@ class Register(CreateView):
         context = {
             'form': form,
         }
-        return render(request, 'authentication/customer_register.html', context)
+        return render(request, 'account/signup.html', context)
     def post(self,request):
         
         form=Registerform(request.POST)
@@ -41,28 +42,22 @@ class Register(CreateView):
                 
             )
             user.groups.add(groups)
-            digits = "0123456789"
-            otp = ""
-            i=0
-            for i in range(4): 
-                otp+=digits[math.floor(random.random()*10)]
-            otp = int(otp)
+            otp = generate_otp()
             user.otp = otp
-            user.save()
-            print(user.email)
+            user.save() 
+            User.objects.filter(email=email).update(is_active =False)
             send_verification_otp(email, otp)
             value ={
                 'email' : email,
-                'otp' : otp
             }
-            print('************')
-            # return redirect('registrationOtp')   
-            return render(request,'authentication/otp.html',value)   
+            # return redirect('registrationOtp')
+            messages   
+            return render(request,'account/otp.html',value)   
         context = {
             'form' : form
         }
         
-        return render(request, 'authentication/customer_register.html', context)
+        return render(request, 'account/signup.html', context)
     
 class ProductadminRegister(CreateView):
     
@@ -73,7 +68,7 @@ class ProductadminRegister(CreateView):
         context = {
             'form': form,
         }
-        return render(request, 'authentication/productAdmin_register.html', context)
+        return render(request, 'account/productAdmin_register.html', context)
     def post(self,request):
         
         form=Registerform(request.POST)
@@ -93,14 +88,24 @@ class ProductadminRegister(CreateView):
                 
             )
             user.groups.add(groups) 
-            
-            
-            return redirect('customer_login')
+            otp = generate_otp()
+            user.otp = otp
+            user.save()
+            User.objects.filter(email=email).update(is_active =False)
+            send_verification_otp(email, otp)
+            # message = 'Email hass been sent'
+            value ={
+                'email' : email,
+                # 'message' : message
+            }
+            # return redirect('registrationOtp')  
+            messages.success(request,'otp has been sent') 
+            return render(request,'account/otp.html',value)   
         context = {
             'form' : form
         }
         
-        return render(request, 'authentication/productAdmin_register.html', context)
+        return render(request, 'account/productAdmin_register.html', context)
 
 
 

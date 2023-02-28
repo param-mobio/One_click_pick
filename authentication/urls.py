@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path,include
-from authentication.views import register,login,logout,otp,resetpassword
+from authentication.views import register,login,logout,otp,resetpassword,changepassword,forgetpassword
 
 urlpatterns = [
     path('register/',register.Register.as_view(),name='customer_register'),
@@ -10,5 +10,7 @@ urlpatterns = [
     path('productAdminRegister/',register.ProductadminRegister.as_view(),name='productAdminRegister'),
     path('registrationOtp/',otp.Otp.as_view(),name='registrationOtp'),
     path('resetpassword/', resetpassword.Resetpassword.as_view(), name='resetpassword'),
+    path('changepassword/<token>/',changepassword.Changepassword.as_view(),name='changepassword'),
+    path('fogetpassword/',forgetpassword.Forgetpassword.as_view(),name='forgetpassword'),
 
 ]

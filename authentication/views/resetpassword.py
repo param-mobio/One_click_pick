@@ -7,7 +7,7 @@ from django.contrib import messages
 
 class Resetpassword(View):
     def get(self,request):
-        return render(request,'authentication/resetpassword.html')
+        return render(request,'account/resetpassword.html')
     def post(self,request):
         password = request.POST.get('currentpassword')
         newpassword = request.POST.get('newpassword')
@@ -34,18 +34,19 @@ class Resetpassword(View):
                     if (i == '@' or i == '$' or i == '_'):
                         p += 1
                 if (l < 1 or u < 1 or p < 1 or d < 1 or l+p+u+d != len(newpassword)):
-                    messages.info(request,'password must be strong')
+                    messages.error(request,'password must be strong')
                 else:
                     if(newpassword==confirmpassword):
                         user.password = make_password(confirmpassword)
+                        messages.success('passowrd is succesfully changed')
                         return redirect('profile')
                     else:
-                        messages.info(request,'New password and confirm password should be same')
+                        messages.error(request,'New password and confirm password should be same')
                     
             else:
-                messages.info(request,'password is short')
+                messages.error(request,'password is short')
                     
         else:
-            messages.info(request,'Current passowrd is wrong')        
+            messages.error(request,'Current passowrd is wrong')        
 
-        return render(request,'authentication/resetpassword.html')
+        return render(request,'account/resetpassword.html')
