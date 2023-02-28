@@ -17,13 +17,14 @@
   {% else %}
   <a href="{% url 'logout' %}" type="submit" class="button">logout</a>
   {% endif %}
-  {% comment %} <button class="btn btn-dark" type="submit">{% trans 'Sign Out' %}</button> {% endcomment %}
+  <button class="btn btn-dark" type="submit">{% trans 'Sign Out' %}</button>
 </form>
 
 </div>
-{% endblock %}
-    {{request.user}}
+{{request.user}}
     
-    {% if user.is_authenticated %}
-    <p>helooo</p>
-    {% endif %}
+{% if user.is_authenticated %}
+<p>helooo</p>
+{% endif %}
+{% endblock %}
+   
