@@ -26,7 +26,11 @@ class Otp(View):
         realotp = request.POST.get('otp')
         # realotp = request.POST.get('realotp')
         email = request.POST.get('email')
-        user= User.objects.get(email=email)
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
+        else:
+            messages.error(request,'User is not found')
+            return redirect ('registrationOtp')
         # print(realotp)
 
         # clickbutton = request.POST.get('submit')

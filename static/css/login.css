@@ -9,7 +9,7 @@
 body{
 
   width: 100%;
-  background: #009579;
+  background: #674d4d;
 }
 .container{
   position: absolute;
@@ -64,8 +64,8 @@ body{
   text-decoration: underline;
 }
 .form input.button{
-  color: #fff;
-  background: #009579;
+  color: #0c0c0c;
+  background: #D19C97;
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 1px;
@@ -74,7 +74,8 @@ body{
   transition: 0.4s;
 }
 .form input.button:hover{
-  background: #006653;
+  color: #fff;
+  background: #D19C97;
 }
 .signup{
   font-size: 17px;

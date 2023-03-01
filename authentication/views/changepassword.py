@@ -1,9 +1,8 @@
 from user.models import User
 from django.shortcuts import redirect, render
 from django.views import View
-import uuid
 from django.contrib import messages
-from authentication.helpers import send_forget_password_email
+from authentication.forms import checkpassword
 
 class Changepassword(View):
     def get(self, request, token):
@@ -28,38 +27,23 @@ class Changepassword(View):
             messages.error(request, 'No user id found')
             return render(request, 'account/changepassword.html', context)
 
-        l, u, p, d = 0, 0, 0, 0
-        if (len(new_password) >= 8):
-            for i in new_password:
-
-                # counting lowercase alphabets
-                if (i.islower()):
-                    l += 1
-
-                # counting uppercase alphabets
-                if (i.isupper()):
-                    u += 1
-
-                # counting digits
-                if (i.isdigit()):
-                    d += 1
-
-                # counting the mentioned special characters
-                if (i == '@' or i == '$' or i == '_'):
-                    p += 1
-            if (l < 1 or u < 1 or p < 1 or d < 1 or l+p+u+d != len(new_password)):
-                messages.error(request, "password is not valid")
-                return render(request, 'account/changepassword.html', context)
-        else:
+        if (len(new_password) < 8):
             messages.error(request, "password is short")
             return render(request, 'account/changepassword.html', context)
+        else:
+            if(checkpassword(new_password)==True):
+                if new_password != confirm_password:
+                    messages.error(request, "both password should be same")
+                    return render(request, 'account/changepassword.html', context)
 
-        if new_password != confirm_password:
-            messages.error(request, "both password should be same")
-            return render(request, 'account/changepassword.html', context)
-
-        user_obj = User.objects.get(id=user_id)
-        user_obj.set_password(new_password)
-        user_obj.save()
-        messages.success(request,'password has been change')
-        return redirect('customer_login')
+                user_obj = User.objects.get(id=user_id)
+                user_obj.set_password(new_password)
+                user_obj.save()
+                messages.success(request,'password has been change')
+                return redirect('customer_login')
+            else:
+                msg = checkpassword(new_password)
+                messages.error(request,msg)
+                return render(request, 'account/changepassword.html', context)
+            
+        

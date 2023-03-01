@@ -8,7 +8,7 @@ from .manager import UserManager
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, null=True, db_index=True)
-    phone=models.IntegerField(null=True,blank=True)
+    phone=models.CharField(max_length=10, null=True,blank=True)
     address=models.TextField(max_length=200,null=True,blank=True)
     profile=models.ImageField(null=True, blank=True)
     created_at=models.DateTimeField(auto_now_add=True)

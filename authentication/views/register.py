@@ -1,19 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.http import HttpRequest
+from django.shortcuts import render
 from user.models import User
-from django.contrib.auth import authenticate,login,logout
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView,FormView
+from django.views.generic.edit import CreateView
 from authentication.forms import Registerform
-from django.views import View
 from django.contrib import messages
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group
 from authentication.helpers import send_verification_otp
-from django.urls import reverse
 from authentication.views.otp import generate_otp
-import math
-import random
 
 class Register(CreateView):
     
@@ -31,6 +24,7 @@ class Register(CreateView):
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
             email = form.cleaned_data.get('email')
+            phone = form.cleaned_data.get('phone')
             groups = Group.objects.get(name ='customer')
 
             user = User.objects.create(
@@ -38,6 +32,7 @@ class Register(CreateView):
                 email = email,
                 first_name = first_name,
                 last_name = last_name,
+                phone = phone,
                 password = make_password(password),
                 
             )
@@ -51,7 +46,7 @@ class Register(CreateView):
                 'email' : email,
             }
             # return redirect('registrationOtp')
-            messages   
+            messages.success(request,'otp has been sent')   
             return render(request,'account/otp.html',value)   
         context = {
             'form' : form

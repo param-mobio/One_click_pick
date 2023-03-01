@@ -9,17 +9,18 @@
   <header>Login
   </header>
   <form method="POST">
+    {% if messages %}
+    {% for message in messages  %}
+    <div class="alert {{message.tags}} alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+        <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
     {% csrf_token %}
     <input type="email" name="email" placeholder="Enter your email">
     <input type="password" name = "password" placeholder="Enter password">
-    {% if messages %}
-  {% for message in messages  %}
-  <div class="alert {{message.tags}} alert-dismissible" role="alert">
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
-      <strong>{{message}}</strong>
-  </div>
-  {% endfor %}
-  {% endif %}
+    
     <a href="{% url 'forgetpassword' %}">Forgot password?</a>
     <input type="submit" class="button" value="Login">
   </form>

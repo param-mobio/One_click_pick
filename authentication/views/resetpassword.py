@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.http import HttpRequest
-from user.models import User
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.hashers import check_password, make_password
 from django.contrib import messages
+from authentication.forms import checkpassword
+from user.models import User
 
 class Resetpassword(View):
     def get(self,request):
@@ -13,39 +13,22 @@ class Resetpassword(View):
         newpassword = request.POST.get('newpassword')
         confirmpassword = request.POST.get('confirmpassword')
         user = request.user
+        email = User.objects.get(email=user)
+        print(user)
         if(check_password(password,user.password)):
-            l, u, p, d = 0, 0, 0, 0
-            if (len(newpassword) >= 8):
-                for i in newpassword:
-
-                    # counting lowercase alphabets
-                    if (i.islower()):
-                        l += 1
-
-                    # counting uppercase alphabets
-                    if (i.isupper()):
-                        u += 1
-
-                    # counting digits
-                    if (i.isdigit()):
-                        d += 1
-
-                    # counting the mentioned special characters
-                    if (i == '@' or i == '$' or i == '_'):
-                        p += 1
-                if (l < 1 or u < 1 or p < 1 or d < 1 or l+p+u+d != len(newpassword)):
-                    messages.error(request,'password must be strong')
-                else:
-                    if(newpassword==confirmpassword):
-                        user.password = make_password(confirmpassword)
-                        messages.success('passowrd is succesfully changed')
-                        return redirect('profile')
-                    else:
-                        messages.error(request,'New password and confirm password should be same')
-                    
+            
+            if (len(newpassword) < 8):
+                messages.error(request, "password is short")
+                return render(request, 'account/resetpassword.html')
             else:
-                messages.error(request,'password is short')
-                    
+                if(checkpassword(newpassword)==True):
+                    if newpassword != confirmpassword:
+                        messages.error(request, "both password should be same")
+                        return render(request, 'account/resetpassword.html')
+                    messages.success(request,'your password has been changed')
+                    email.set_password(newpassword)
+                    email.save()
+                    return redirect('customer_login')
         else:
             messages.error(request,'Current passowrd is wrong')        
 

@@ -1,18 +1,13 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.http import HttpRequest
+from django.shortcuts import render, redirect
 from user.models import User
-from django.contrib.auth import authenticate,login,logout
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView,FormView
+from django.contrib.auth import login
 from django.contrib import messages
 from django.views import View
-from django.contrib.auth.models import Group
-
-from django.contrib.auth import login,authenticate
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth import login
+from django.contrib.auth.hashers import check_password
 from authentication.views.otp import generate_otp
 from authentication.helpers import send_verification_otp
-from allauth.account.views import email
+
 
 class Login(View):
     template_name = 'account/login.html'
