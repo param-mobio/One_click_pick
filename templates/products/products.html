@@ -1,0 +1,34 @@
+{% extends 'products/base.html' %}
+{% block content %}
+
+<h1 class="mt-5">Products</h1>
+<div class="container">
+    <table class="table mt-5">
+        <thead>
+        <tr>
+            <th scope="col" class="table-primary">Product</th>
+            <th scope="col" class="table-primary">Company</th>
+            <th scope="col" class="table-primary">Category</th>
+            <th scope="col" class="table-primary">Price</th>
+            {% comment %} <th scope="col" class="table-primary">update</th>
+            <th scope="col" class="table-primary">delete</th> {% endcomment %}
+        </tr>
+        </thead>
+        <tbody>
+        {% comment %} {{products}} {% endcomment %}
+        
+        {% for p in page_obj %}
+        <tr>
+            <td>{{p.name}}</td>
+            <td>{{p.company}}</td>
+            <td>{{p.category}}</td>
+            <td>{{p.price}}</td>
+            {% comment %} <td><a href="{% url 'updateProduct' p.id %}" class="btn btn-primary">Update</a></td>
+            <td><a href="{% url 'deleteProduct' p.id %}"  class="btn btn-danger">Remove</a></td> {% endcomment %}
+        </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+{% endblock %}

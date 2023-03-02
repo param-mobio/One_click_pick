@@ -33,7 +33,7 @@ class Login(View):
             else:
                 if check_password(password,user.password):
                     login(request,user,backend='django.contrib.auth.backends.ModelBackend')
-                    return redirect('profile')
+                    return redirect('index')
                 else:
                     messages.error(request,'password is wrong')
         else:
