@@ -1,34 +1,59 @@
 {% extends 'products/base.html' %}
 {% block content %}
-
-<h1 class="mt-5">Products</h1>
 <div class="container">
+    <h1 class="mt-5">Products</h1>
     <table class="table mt-5">
         <thead>
         <tr>
             <th scope="col" class="table-primary">Product</th>
             <th scope="col" class="table-primary">Company</th>
+            {% comment %} <th scope="col" class="table-primary">Image</th> {% endcomment %}
             <th scope="col" class="table-primary">Category</th>
             <th scope="col" class="table-primary">Price</th>
-            {% comment %} <th scope="col" class="table-primary">update</th>
-            <th scope="col" class="table-primary">delete</th> {% endcomment %}
+            <th scope="col" class="table-primary">update</th>
+            <th scope="col" class="table-primary">delete</th> 
         </tr>
         </thead>
         <tbody>
         {% comment %} {{products}} {% endcomment %}
         
-        {% for p in page_obj %}
-        <tr>
-            <td>{{p.name}}</td>
-            <td>{{p.company}}</td>
-            <td>{{p.category}}</td>
-            <td>{{p.price}}</td>
-            {% comment %} <td><a href="{% url 'updateProduct' p.id %}" class="btn btn-primary">Update</a></td>
-            <td><a href="{% url 'deleteProduct' p.id %}"  class="btn btn-danger">Remove</a></td> {% endcomment %}
-        </tr>
-        {% endfor %}
-        
+            {% for p in products %}
+            <tr>
+                <td>{{p.name}}</td>
+                {% comment %} <td><img src="{{p.image.url}}" alt=""></td> {% endcomment %}
+                <td>{{p.company}}</td>
+                <td>{{p.category}}</td> 
+                <td>{{p.price}}</td>
+                {% comment %} <td>{{p.id}}</td> {% endcomment %}
+                <td><a href="{% url 'updateproduct' p.id %}" class="btn btn-secondary">Update</a></td>
+                
+                <td>
+                    <a type = "button" id = "submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{p.id}}">Remove</a>
+                    {% comment %} <input type="text" value="{{p.id}}" hidden id ="#pk"> {% endcomment %}
+                </td> 
+            </tr>    
+            
+                    <div class="modal fade" id="exampleModal{{p.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel{{p.id}}">Are you sure you Want to delete </h1>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" >
+                                    <h3 id="modal_body"></h3>
+                                </div>
+                                <div class="modal-footer">
+                                    <a id="link" href="{% url 'deleteproduct' p.id  %}" class="btn btn-danger">Remove</a>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                {% endfor %}
         </tbody>
     </table>
 </div>
+
+
 {% endblock %}
