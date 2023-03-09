@@ -1,121 +1,35 @@
 {% extends 'products/base.html' %}
-
+{% load custom_tag %}
+{% load widget_tweaks %}
 {% block category %}
 <div class="col-lg-3 d-none d-lg-block">
-    <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-        <h6 class="m-0">Categories</h6>
-        <i class="fa fa-angle-down text-dark"></i>
-    </a>
+   
     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
-        <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
-                <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                    <a href="" class="dropdown-item">Men's Dresses</a>
-                    <a href="" class="dropdown-item">Women's Dresses</a>
-                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                </div>
-            </div>
-            <a href="" class="nav-item nav-link">Shirts</a>
-            <a href="" class="nav-item nav-link">Jeans</a>
-            <a href="" class="nav-item nav-link">Swimwear</a>
-            <a href="" class="nav-item nav-link">Sleepwear</a>
-            <a href="" class="nav-item nav-link">Sportswear</a>
-            <a href="" class="nav-item nav-link">Jumpsuits</a>
-            <a href="" class="nav-item nav-link">Blazers</a>
-            <a href="" class="nav-item nav-link">Jackets</a>
-            <a href="" class="nav-item nav-link">Shoes</a>
-        </div>
+        
+
     </nav>
 </div>
 {% endblock  %}
 {% block content %}
 <!-- Shop Start -->
 <div class="container-fluid pt-5">
-  <div class="row px-xl-5">
-      <!-- Shop Sidebar Start -->
-      <div class="col-lg-3 col-md-12">
-          <!-- Price Start -->
-          <div class="border-bottom mb-4 pb-4">
-              <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
-              <form>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" checked id="price-all">
-                      <label class="custom-control-label" for="price-all">All Price</label>
-                      <span class="badge border font-weight-normal">1000</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="price-1">
-                      <label class="custom-control-label" for="price-1">$0 - $100</label>
-                      <span class="badge border font-weight-normal">150</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="price-2">
-                      <label class="custom-control-label" for="price-2">$100 - $200</label>
-                      <span class="badge border font-weight-normal">295</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="price-3">
-                      <label class="custom-control-label" for="price-3">$200 - $300</label>
-                      <span class="badge border font-weight-normal">246</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="price-4">
-                      <label class="custom-control-label" for="price-4">$300 - $400</label>
-                      <span class="badge border font-weight-normal">145</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                      <input type="checkbox" class="custom-control-input" id="price-5">
-                      <label class="custom-control-label" for="price-5">$400 - $500</label>
-                      <span class="badge border font-weight-normal">168</span>
-                  </div>
-              </form>
-          </div>
-          <!-- Price End -->
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
           
-          <!-- Color Start -->
-          <div class="border-bottom mb-4 pb-4">
-              <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
-              <form>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" checked id="color-all">
-                      <label class="custom-control-label" for="price-all">All Color</label>
-                      <span class="badge border font-weight-normal">1000</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="color-1">
-                      <label class="custom-control-label" for="color-1">Black</label>
-                      <span class="badge border font-weight-normal">150</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="color-2">
-                      <label class="custom-control-label" for="color-2">White</label>
-                      <span class="badge border font-weight-normal">295</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="color-3">
-                      <label class="custom-control-label" for="color-3">Red</label>
-                      <span class="badge border font-weight-normal">246</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" id="color-4">
-                      <label class="custom-control-label" for="color-4">Blue</label>
-                      <span class="badge border font-weight-normal">145</span>
-                  </div>
-                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                      <input type="checkbox" class="custom-control-input" id="color-5">
-                      <label class="custom-control-label" for="color-5">Green</label>
-                      <span class="badge border font-weight-normal">168</span>
-                  </div>
-              </form>
-          </div>
-          <!-- Color End -->
-
-          <!-- Size Start -->
-          <div class="mb-5">
-              <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
-              <form method = 'GET' action="">
-                
+          <div class="col-lg-3 col-md-12">
+              <form action="" method="GET">
+              <!-- Price Start -->
+              <div class="border-bottom mb-4 pb-4">
+                  <h5 class="font-weight-semi-bold mb-4">Filter by category</h5>
+                  {% render_field category_filter.form.category class="btn shadow-none border d-flex align-items-center justify-content-between text-dark   w-100" %}
+              </div>
+              <div class="border-bottom mb-4 pb-4">
+                <h5 class="font-weight-semi-bold mb-4">Filter by Section</h5>
+                  {% render_field section_filter.form.section class="btn shadow-none border d-flex align-items-center justify-content-between text-dark   w-100" %}
+              </div>
+            <!-- Size Start -->
+              <div class="mb-5">
+                  <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                       <input type="checkbox" class="custom-control-input" value = "allsize" name ="size"  id="size-all">
                       <label class="custom-control-label" for="size-all">All Size</label>
@@ -141,47 +55,50 @@
                       <label class="custom-control-label" for="size-5">XL</label>
                       <span class="badge border font-weight-normal">168</span>
                   </div>
-                  <input type="submit" class="btn btn-dark" value ="Apply">
+              </div>
+              <input type="submit" class="btn btn-dark" value ="Apply">
               </form>
           </div>
-          <!-- Size End -->
-      </div>
-      <!-- Shop Sidebar End -->
-
-
-      <!-- Shop Product Start -->
-      <div class="col-lg-9 col-md-12">
-          <div class="row pb-3">
-              <div class="col-12 pb-1">
-                  <div class="d-flex align-items-center justify-content-between mb-4">
-                      <form action="">
-                          <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Search by name">
-                              <div class="input-group-append">
-                                  <span class="input-group-text bg-transparent text-primary">
-                                      <i class="fa fa-search"></i>
-                                  </span>
-                              </div>
-                          </div>
-                      </form>
-                      <div class="dropdown ml-4">
-                          <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                  aria-expanded="false">
-                                      Sort by
-                                  </button>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                              <a class="dropdown-item" href="#">Latest</a>
-                              <a class="dropdown-item" href="#">Popularity</a>
-                              <a class="dropdown-item" href="#">Best Rating</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              {% for p in page_obj  %}
+          
+            <!-- Size End -->
+        
+        <!-- Shop Sidebar End -->
+  
+  
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-12">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <form action="" method="GET">
+                            <div class="input-group">
+                                {% if s %}
+                                <input type="text" class="form-control" value ={{s}} name="search" placeholder="Search by name">
+                                {% else %}
+                                <input type="text" class="form-control" name="search" placeholder="Search by name">
+                                {% endif %}
+                                
+                                <div class="input-group-append">
+                                    {% comment %} <span class="input-group-text bg-transparent text-primary"> {% endcomment %}
+                                      <button class="btn btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg>
+                                      </button>
+                                    {% comment %} </span> {% endcomment %}
+                                </div>
+                                
+                            </div>
+                            
+                        </form>
+                        
+              
+                    </div>
+                </div>
+                {% for p in page_obj %}
               <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                   <div class="card product-item border-0 mb-4">
                       <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                          <img class="img-fluid w-100" src="{{p.image.url}}" alt="">
+                          <img class="img-fluid h-100 w-100" src="{{p.image.url}}" alt="">
                       </div>
                       <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                           <h6 class="text-truncate mb-3">{{p.name}}</h6>
@@ -190,7 +107,7 @@
                           </div>
                       </div>
                       <div class="card-footer d-flex justify-content-between bg-light border">
-                          <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                          <a href="{% url 'detail' p.id %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                           <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                       </div>
                   </div>
@@ -204,7 +121,7 @@
                         <li class="page-item ">
                             {% if page_obj.has_previous %}
                         
-                        <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                        <a class="page-link" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span> 
                             
@@ -215,11 +132,11 @@
                     {% for page in page_obj.paginator.page_range %}
                     {% if page_obj.number == page %}
                     <li class="page-item active">
-                        <a class="page-link" href="?page={{page}}">
+                        <a class="page-link" href="?page={{page}}&">
                             {{page}}</a></li>
                     {% else %}
                     <li class="page-item ">
-                        <a class="page-link" href="?page={{page}}">
+                        <a class="page-link" href="?page={{page}}&">
                             {{page}}</a></li>
                     {% endif %}  
                     
@@ -229,7 +146,7 @@
                       {% comment %} {% endwith %} {% endcomment %}
                     
                     {% if page_obj.has_next  %}
-                        <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+                        <a class="page-link" href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}" aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                           <span class="sr-only">Next</span></a>
                       </li>

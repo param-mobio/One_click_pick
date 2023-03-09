@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from products.models import Products
-from products.models import Category
+from products.models import Category,Section
 import requests
 SIZE = (
         ('','Select size'),
@@ -51,7 +51,23 @@ class ProductForm(ModelForm):
             }
         )
     )
-    
+    colour = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "required": "True",
+                "placeholder": "Enter colour",
+            }
+        )
+    )
+    section = forms.ModelChoiceField(queryset=Section.objects.all(), empty_label="Select section",required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control form-select mb-3",
+                
+            }
+        )
+    )
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select category",required=False,
         widget=forms.Select(
             attrs={
@@ -95,6 +111,8 @@ class ProductForm(ModelForm):
             "company",
             "size",
             "price",
+            "colour",
+            "section",
             "category",
             "image",
             "description",
