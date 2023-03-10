@@ -8,6 +8,8 @@ class Shop(View):
     
     def get(self,request):
         products = Products.objects.all()
+        if products is None:
+            products.delete()
         category = Category.objects.all()
         s = request.GET.get('search')
         if s!=None:

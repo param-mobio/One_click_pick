@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from products.models import Products
-from products.models import Category,Section
+from products.models import Category,Section,Colour
 import requests
 SIZE = (
         ('','Select size'),
@@ -51,12 +51,12 @@ class ProductForm(ModelForm):
             }
         )
     )
-    colour = forms.CharField(
-        widget=forms.TextInput(
+    colour = forms.ModelMultipleChoiceField(queryset=Colour.objects.all(),help_text = 'Hold down “Control”, or “Command” on a Mac, to select more than one.',
+        widget=forms.SelectMultiple(
             attrs={
                 "class": "form-control mb-3",
                 "required": "True",
-                "placeholder": "Enter colour",
+                # "placeholder": "Enter colour",
             }
         )
     )
@@ -81,9 +81,19 @@ class ProductForm(ModelForm):
             attrs={
                 "class": "form-control mb-3",
                 "required": "True",
+                # "multiple":"True",
             }
         )
     )
+    # multipleimage = forms.ImageField(
+    #     widget=forms.FileInput(
+    #         attrs={
+    #             "class": "form-control mb-3",
+    #             "required": "True",
+    #             "multiple":"True",
+    #         }
+    #     )
+    # )
     description = forms.CharField(
         widget=forms.Textarea(
             attrs={
@@ -115,6 +125,7 @@ class ProductForm(ModelForm):
             "section",
             "category",
             "image",
+            # "multipleimage",
             "description",
             # "created_by",
         ]

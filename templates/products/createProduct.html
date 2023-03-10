@@ -1,9 +1,10 @@
 {% extends 'products/base.html' %}
+{% load static %}
 {% block content %}
 
 
 <div class="container">
-    {{request.user}}
+    
     <h1 class="mb-4 display-5 font-weight-semi-bold" >Creat Product</h1>
     <div class="row">
         <div class="col-md-6 col-lg-6">
@@ -15,14 +16,45 @@
                     {% if field.errors %}
                     {{field.label}}
                     {{field.errors}}
+
                     {% endif %}
                     {{field.label}}
                     {{field}}
+                    {{field.help_text}}
                     {% endfor %}
                     <input type="text" name="created_by" value="{{request.user}}" class="form-control mb-3" required="" data-validation-required-message="Please enter your name" disabled="True" id="id_created_by">
                     <input class="btn btn-primary py-2 px-4" type="submit" name="submit">
                 </form>
             </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                add color
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <label for="" class="">Color</label>
+                        <input type="text" class="form-control" name="color">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <img class="img-fluid" src="{% static 'images/clothes.jpg' %}" alt="">
         </div>
     </div>
 </div>

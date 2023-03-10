@@ -8,5 +8,5 @@ urlpatterns = [
     path('deleteproduct/<str:pk>',deleteproduct.DeleteProduct.as_view(),name='deleteproduct'),
     path('shop/',shop.Shop.as_view(),name ='shop'),
     path('new/',new.New.as_view(),name='new'),
-    path('detail/<str:pk>',details.Details.as_view,name='detail'),
+    path('detail/<str:pk>',details.Details.as_view(),name='detail'),
 ]

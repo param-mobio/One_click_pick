@@ -15,7 +15,6 @@
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
         <!-- Shop Sidebar Start -->
-          
           <div class="col-lg-3 col-md-12">
               <form action="" method="GET">
               <!-- Price Start -->
@@ -36,7 +35,7 @@
                       <span class="badge border font-weight-normal">1000</span>
                   </div>
                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                      <input type="checkbox" class="custom-control-input" name ="size" value = "Medium"  id="size-1">
+                      <input type="checkbox" class="custom-control-input" name ="size" value = " Medium"   id="size-1">
                       <label class="custom-control-label" for="size-1">M</label>
                       <span class="badge border font-weight-normal">15000</span>
                   </div>
@@ -90,15 +89,15 @@
                             </div>
                             
                         </form>
-                        
-              
                     </div>
                 </div>
                 {% for p in page_obj %}
               <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                   <div class="card product-item border-0 mb-4">
                       <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                        <a href="{% url 'detail' p.id %}" >
                           <img class="img-fluid h-100 w-100" src="{{p.image.url}}" alt="">
+                        </a>  
                       </div>
                       <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                           <h6 class="text-truncate mb-3">{{p.name}}</h6>
@@ -132,11 +131,11 @@
                     {% for page in page_obj.paginator.page_range %}
                     {% if page_obj.number == page %}
                     <li class="page-item active">
-                        <a class="page-link" href="?page={{page}}&">
+                        <a class="page-link" href="{% my_url page 'page' request.GET.urlencode %}">
                             {{page}}</a></li>
                     {% else %}
                     <li class="page-item ">
-                        <a class="page-link" href="?page={{page}}&">
+                        <a class="page-link" href="{% my_url page 'page' request.GET.urlencode %}">
                             {{page}}</a></li>
                     {% endif %}  
                     

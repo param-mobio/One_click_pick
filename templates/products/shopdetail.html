@@ -4,11 +4,12 @@
 <div class="container-fluid py-5">
     <div class="row px-xl-5">
         <div class="col-lg-5 pb-5">
-            <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner border">
-                    <div class="carousel-item active">
-                        <img class="w-100 h-100" src="img/product-1.jpg" alt="Image">
-                    </div>
+            {% comment %} <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner border"> {% endcomment %}
+
+                    {% comment %} <div class="carousel-item active"> {% endcomment %}
+                        <img class="w-100 h-100" src="{{products.image.url}}" alt="Image">
+                    {% comment %} </div>
                     <div class="carousel-item">
                         <img class="w-100 h-100" src="img/product-2.jpg" alt="Image">
                     </div>
@@ -18,18 +19,18 @@
                     <div class="carousel-item">
                         <img class="w-100 h-100" src="img/product-4.jpg" alt="Image">
                     </div>
-                </div>
-                <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+                </div> {% endcomment %}
+                {% comment %} <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                     <i class="fa fa-2x fa-angle-left text-dark"></i>
                 </a>
                 <a class="carousel-control-next" href="#product-carousel" data-slide="next">
                     <i class="fa fa-2x fa-angle-right text-dark"></i>
                 </a>
-            </div>
+            </div> {% endcomment %}
         </div>
 
         <div class="col-lg-7 pb-5">
-            <h3 class="font-weight-semi-bold">Colorful Stylish Shirt</h3>
+            <h3 class="font-weight-semi-bold">{{products.name}}</h3>
             <div class="d-flex mb-3">
                 <div class="text-primary mr-2">
                     <small class="fas fa-star"></small>
@@ -40,8 +41,9 @@
                 </div>
                 <small class="pt-1">(50 Reviews)</small>
             </div>
-            <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
-            <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit clita ea. Sanc invidunt ipsum et, labore clita lorem magna lorem ut. Erat lorem duo dolor no sea nonumy. Accus labore stet, est lorem sit diam sea et justo, amet at lorem et eirmod ipsum diam et rebum kasd rebum.</p>
+            <h3 class="font-weight-semi-bold mb-4">{{products.company}}</h3>
+            <h3 class="font-weight-semi-bold mb-4">Rs.{{products.price}}</h3>
+            <p class="mb-4">{{products.description}}</p>
             <div class="d-flex mb-3">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
                 <form>
@@ -70,26 +72,13 @@
             <div class="d-flex mb-4">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
                 <form>
+                    {% for c in color %}
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-1" name="color">
-                        <label class="custom-control-label" for="color-1">Black</label>
+                        <input type="radio" class="custom-control-input" id="{{c.id}}"  name="color" value="{{c.name}}">
+                        <label class="custom-control-label" for="{{c.id}}">{{c.name}}</label>   
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-2" name="color">
-                        <label class="custom-control-label" for="color-2">White</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-3" name="color">
-                        <label class="custom-control-label" for="color-3">Red</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-4" name="color">
-                        <label class="custom-control-label" for="color-4">Blue</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-5" name="color">
-                        <label class="custom-control-label" for="color-5">Green</label>
-                    </div>
+                    {% endfor %}
+    
                 </form>
             </div>
             <div class="d-flex align-items-center mb-4 pt-2">
@@ -108,23 +97,7 @@
                 </div>
                 <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
             </div>
-            <div class="d-flex pt-2">
-                <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
-                <div class="d-inline-flex">
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-pinterest"></i>
-                    </a>
-                </div>
-            </div>
+            
         </div>
     </div>
     <div class="row px-xl-5">
@@ -245,81 +218,23 @@
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
+                {% for p in likesproduct|slice:4  %}
                 <div class="card product-item border-0">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+                        <img class="img-fluid w-100" src="{{p.image.url}}" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                        <h6 class="text-truncate mb-3">{{p.name}}t</h6>
                         <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h6>Rs.{{p.price}}</h6>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                        <a href="{% url 'detail' p.id %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                         <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                     </div>
                 </div>
-                <div class="card product-item border-0">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                    </div>
-                </div>
-                <div class="card product-item border-0">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                    </div>
-                </div>
-                <div class="card product-item border-0">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                    </div>
-                </div>
-                <div class="card product-item border-0">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="img/product-5.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
