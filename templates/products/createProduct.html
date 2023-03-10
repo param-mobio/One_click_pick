@@ -1,0 +1,29 @@
+{% extends 'products/base.html' %}
+{% block content %}
+
+
+<div class="container">
+    {{request.user}}
+    <h1 class="mb-4 display-5 font-weight-semi-bold" >Creat Product</h1>
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            <div class="contact-form">
+                <div id="success"></div>
+                <form  action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form  %}
+                    {% if field.errors %}
+                    {{field.label}}
+                    {{field.errors}}
+                    {% endif %}
+                    {{field.label}}
+                    {{field}}
+                    {% endfor %}
+                    <input type="text" name="created_by" value="{{request.user}}" class="form-control mb-3" required="" data-validation-required-message="Please enter your name" disabled="True" id="id_created_by">
+                    <input class="btn btn-primary py-2 px-4" type="submit" name="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}
