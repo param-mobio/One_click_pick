@@ -28,17 +28,20 @@ class Category(models.Model):
     update_by=models.ForeignKey(User,max_length=200,related_name='products.Category.ipdated_by+', null=True,blank=True, on_delete=models.SET_NULL)
     def __str__(self):
         return self.name
+    
+class Size(models.Model):
+    name = models.CharField(max_length=100,null=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+    created_by=models.ForeignKey(User,max_length=200,related_name='products.size.created_by+', null=True,on_delete=models.SET_NULL)
+    update_by=models.ForeignKey(User,max_length=200,related_name='products.size.ipdated_by+', null=True,blank=True, on_delete=models.SET_NULL)
+    def __str__(self):
+        return self.name
 
 class Products(models.Model):
-    SIZE = {
-        ('Small','S'),
-        ('Medium','M'),
-        ('Larger','L'),
-        ('Extra Large','XL'),
-        ('XLL','XXL')
-    }
+    
     name = models.CharField(max_length=100,null=True)
-    size = models.CharField(max_length=100,null=True,choices=SIZE)
+    size = models.ManyToManyField(Size,max_length=5,blank=True)  
     company = models.CharField(max_length=100,null=True)
     price = models.FloatField(null=True)
     colour = models.ManyToManyField(Colour,max_length=20,blank=True)

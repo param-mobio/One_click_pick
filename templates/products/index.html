@@ -29,6 +29,7 @@
         </nav>
     </div>
     {% endblock %}
+    
     {% block carsoule %}
     <div id="header-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -67,7 +68,12 @@
     {% endblock  %}
 {% block content %} 
 
-    
+{% for message in messages  %}
+<div class="alert {{message.tags}} alert-dismissible" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+    <strong>{{message}}</strong>
+</div>
+{% endfor %}
     
     <!-- Categories Start -->
     <div class="container-fluid pt-5">
@@ -129,8 +135,7 @@
         </div>
     </div>
     <!-- Categories End -->
-
-
+        
     <!-- Products Start -->
     <div class="container-fluid pt-5">
         <div class="text-center mb-4">

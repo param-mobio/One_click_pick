@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from products.models import Products,Category
+from products.models import Products,Category,Size
 from django.core.paginator import Paginator
 from products.filter import CategoryFilter,SectionFilter
 from django.db.models import Q
@@ -8,6 +8,7 @@ class Shop(View):
     
     def get(self,request):
         products = Products.objects.all()
+        sizes = Size.objects.all()
         if products is None:
             products.delete()
         category = Category.objects.all()
@@ -18,11 +19,14 @@ class Shop(View):
             search_product = Products.objects.all()
         
         size = request.GET.getlist('size')
+
         if size:
             if size == ['allsize']:
                 size_product = Products.objects.all()
             else:
-                size_product = Products.objects.filter(size__in=size)
+                si = Size.objects.filter(name__in=size)
+                print(si)
+                size_product = Products.objects.filter(size__in=si)
         else:
             size_product = Products.objects.all()
        
@@ -31,11 +35,10 @@ class Shop(View):
         category_products = category_filter.qs
         section_products = section_filter.qs
         search_size_product = search_product.intersection(size_product)
-       
+        
         filter_product = category_products.intersection(section_products)
        
         products = filter_product.intersection(search_size_product)
-        
         
         paginator_product = Paginator(products,6) 
         page_number = request.GET.get('page')
@@ -47,6 +50,7 @@ class Shop(View):
             'category_filter' : category_filter,
             'section_filter' : section_filter,
             's' : s,
+            'size' : sizes,
         }
         # con['size'] = product.get_size_display()
         return render(request,'products/shop.html',context)

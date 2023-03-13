@@ -1,17 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from products.models import Products
-from products.models import Category,Section,Colour
-import requests
-SIZE = (
-        ('','Select size'),
-        ('Small','S'),
-        ('Medium','M'),
-        ('Larger','L'),
-        ('Extra Large','XL'),
-        ('XLL','XXL'),
-    )
-
+from products.models import Category,Section,Colour,Size
 
 class ProductForm(ModelForm):
     name = forms.CharField(
@@ -34,10 +24,11 @@ class ProductForm(ModelForm):
             }
         )
     )
-    size = forms.CharField(
-        widget=forms.Select(choices=SIZE,
+    size = forms.ModelMultipleChoiceField(queryset=Size.objects.all(),help_text = 'Hold down “Control”, or “Command” on a Mac, to select more than one.',
+        widget=forms.SelectMultiple(
             attrs={
-                "class": "form-control form-select mb-3",
+                "class": "form-control mb-3",
+                "required": "True",
             }
         )
     )
@@ -64,7 +55,7 @@ class ProductForm(ModelForm):
         widget=forms.Select(
             attrs={
                 "class": "form-control form-select mb-3",
-                
+                "required": "True",
             }
         )
     )
@@ -72,7 +63,7 @@ class ProductForm(ModelForm):
         widget=forms.Select(
             attrs={
                 "class": "form-control form-select mb-3",
-                
+                "required": "True",
             }
         )
     )
@@ -85,15 +76,6 @@ class ProductForm(ModelForm):
             }
         )
     )
-    # multipleimage = forms.ImageField(
-    #     widget=forms.FileInput(
-    #         attrs={
-    #             "class": "form-control mb-3",
-    #             "required": "True",
-    #             "multiple":"True",
-    #         }
-    #     )
-    # )
     description = forms.CharField(
         widget=forms.Textarea(
             attrs={
@@ -129,4 +111,15 @@ class ProductForm(ModelForm):
             "description",
             # "created_by",
         ]
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        s = '!@#$%^&*()_-+=*+-?><'
+        
+        if  name in s: 
+            raise forms.ValidationError('names must contain character')
+        return name 
+        
+
+    
 

@@ -5,34 +5,97 @@
 
 <div class="container">
     
-    <h1 class="mb-4 display-5 font-weight-semi-bold" >Creat Product</h1>
-    <div class="row">
-        <div class="col-md-6 col-lg-6">
+    <h1 class="mb-4 display-5 font-weight-semi-bold" >{{name}}</h1>
+    
             <div class="contact-form">
                 <div id="success"></div>
+                {% for message in messages  %}
+                <div class="alert {{message.tags}} alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <strong>{{message}}</strong>
+                </div>
+                {% endfor %}
                 <form  action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% for field in form  %}
+                    {% for field in form %}
                     {% if field.errors %}
-                    {{field.label}}
-                    {{field.errors}}
-
+    
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                        <strong>{{field.errors}}</strong>
+                    </div>  
                     {% endif %}
-                    {{field.label}}
-                    {{field}}
-                    {{field.help_text}}
                     {% endfor %}
-                    <input type="text" name="created_by" value="{{request.user}}" class="form-control mb-3" required="" data-validation-required-message="Please enter your name" disabled="True" id="id_created_by">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            {{form.name.label}}
+                            {{form.name}}
+                            {{form.company.label}}
+                            {{form.company}}
+                            {{form.size.label}}
+                            {{form.size}}
+                            {{form.size.help_text}}
+                            <div>
+                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModalsize">
+                                    add size
+                                </button>
+                            </div>
+                            {{form.price.label}}
+                            {{form.price}}
+                            {{form.description.label}}
+                            {{form.description}}
+                            <input type="text" name="created_by" value="{{request.user}}" class="form-control mb-3" required="" data-validation-required-message="Please enter your name" disabled="True" id="id_created_by">
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            {{form.colour.label}}
+                            {{form.colour}}
+                            <div>
+                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModalcolor">
+                                    add color
+                                </button>
+                            </div>
+                            {{form.colour.help_text}}
+                            {{form.section.label}}
+                            {{form.section}}
+                            {{form.category.label}}
+                            {{form.category}}
+                            <div>
+                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModalcategory">
+                                    add Category
+                                </button>
+                            </div>
+                            {{form.image.label}}
+                            {{form.image}}
+                        </div>
+                    </div>
                     <input class="btn btn-primary py-2 px-4" type="submit" name="submit">
                 </form>
             </div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                add color
-            </button>
+            
             
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModalsize" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <label for="" class="">Size</label>
+                        <input type="text" class="form-control" name="addsize" required>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalcolor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -43,7 +106,7 @@
                         {% csrf_token %}
                         <div class="modal-body">
                             <label for="" class="">Color</label>
-                        <input type="text" class="form-control" name="color">
+                        <input type="text" class="form-control" name="addcolor" required>
                         </div>
                         <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -52,10 +115,25 @@
                 </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-lg-6">
-            <img class="img-fluid" src="{% static 'images/clothes.jpg' %}" alt="">
-        </div>
-    </div>
+            <div class="modal fade" id="exampleModalcategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <label for="" class="">Category</label>
+                        <input type="text" class="form-control" name="addcategory" required>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
 </div>
 {% endblock  %}

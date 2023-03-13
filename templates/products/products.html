@@ -2,6 +2,12 @@
 {% block content %}
 <div class="container">
     <h1 class="mt-5">Products</h1>
+    {% for message in messages  %}
+    <div class="alert {{message.tags}} alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+        <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
     <table class="table mt-5">
         <thead>
         <tr>
