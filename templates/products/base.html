@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_tag %}
 <html lang="en">
 
 <head>
@@ -80,15 +81,27 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
-                            <a href="{% url 'createproduct' %}" class="nav-item nav-link ">Add product</a>
-                            <a href="{% url 'products' %}" class="nav-item nav-link ">products</a>
+                            {% with groups='product_admin' %}
+                                {% if user.groups.all.0|to_str == groups %}
+                                <a href="{% url 'createproduct' %}" class="nav-item nav-link ">Add product</a>
+                                <a href="{% url 'products' %}" class="nav-item nav-link ">products</a>
+                                {% endif %}
+                            {% endwith %}
+                            
                             <a href="{% url 'shop' %}" class="nav-item nav-link">Shop</a>
                             
+
                         </div>
+                        {% if user.is_authenticated  %}
+                        <div class="navbar-nav ml-auto py-0">
+                            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+                        </div>
+                        {% else %}
                         <div class="navbar-nav ml-auto py-0">
                             <a href="{% url 'customer_login' %}" class="nav-item nav-link">Login</a>
                             <a href="{% url 'productAdminRegister' %}" class="nav-item nav-link">Register</a>
                         </div>
+                        {% endif %}
                     </div>
                 </nav>
                 {% block carsoule %}

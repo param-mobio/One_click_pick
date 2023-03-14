@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from products.models import Products,Category
-from django.core.paginator import Paginator
 from products.filter import CategoryFilter,SectionFilter
 from django.db.models import Q
 

@@ -17,3 +17,8 @@ def my_url(value,field_name,urlencode=None):
         url = '{}&{}'.format(url,encoded_querystring)
 
     return url
+
+@register.filter
+def to_str(value):
+    """converts int to string"""
+    return str(value)

@@ -1,9 +1,12 @@
-from django.shortcuts import render,redirect
-from django.views import View
+from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic.edit import UpdateView
-from products.models import Products, User,Colour,Category,Size
+from products.models import Products,Colour,Category,Size
 from products.forms import ProductForm
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class UpdateProduct(UpdateView):
     def get(self,request,pk):
         form = ProductForm()
@@ -18,7 +21,7 @@ class UpdateProduct(UpdateView):
     def post(self,request,pk):
         products = Products.objects.get(id=pk)
         colors = request.POST.getlist('colour')
-        size = request.POST.getlist('size')
+        size = request.POST.getlist('size') 
         category = request.POST.get('category')
         if category:
             category = Category.objects.get(id = category)
@@ -27,29 +30,29 @@ class UpdateProduct(UpdateView):
         if input_color:
             if Colour.objects.filter(name = input_color).exists():
                 messages.error(request,'color is already exists')
-                return redirect('createproduct')
+                # return redirect('products')
             else:
                 Colour.objects.create(name=input_color)
                 messages.success(request,'color is added successfully')
-                return redirect('createproduct')
+                # return redirect('products')
         input_category = request.POST.get('addcategory')
         if input_category:
             if Category.objects.filter(name = input_category).exists():
                 messages.error(request,'category is already exists')
-                return redirect('createproduct')
+                return redirect('products')
             else:
                 Category.objects.create(name=input_category)
                 messages.success(request,'category is added successfully')
-                return redirect('createproduct')
+                return redirect('products')
         input_size = request.POST.get('addsize')
         if input_size:
             if Size.objects.filter(name = input_size).exists():
                 messages.error(request,'size is already exists')
-                return redirect('createproduct')
+                return redirect('products')
             else:
                 Size.objects.create(name=input_size)
                 messages.success(request,'size is added successfully')
-                return redirect('createproduct')
+                return redirect('products')
             
         user = request.user
         if form.is_valid():

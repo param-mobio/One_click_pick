@@ -2,15 +2,16 @@ from django.shortcuts import render,redirect
 from django.views import View
 from products.models import Products,Category,Size
 from django.core.paginator import Paginator
+from django.utils.decorators import method_decorator
 from products.filter import CategoryFilter,SectionFilter
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class Shop(View):
     
     def get(self,request):
         products = Products.objects.all()
         sizes = Size.objects.all()
-        if products is None:
-            products.delete()
         category = Category.objects.all()
         s = request.GET.get('search')
         if s!=None:

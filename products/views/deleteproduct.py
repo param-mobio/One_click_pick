@@ -1,11 +1,11 @@
-from django.shortcuts import render,redirect,HttpResponseRedirect
-from django.urls import reverse
-from django.views import View
+from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
 from django.views.generic.edit import DeleteView
-from products.models import Products, User
+from products.models import Products
 from django.contrib import messages
-
-class DeleteProduct(View):
+from django.contrib.auth.decorators import login_required
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
+class DeleteProduct(DeleteView):
     def get(self,request,pk):
         products = Products.objects.get(id=pk)  
         print(products)

@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect
-from django.views import View
 from django.views.generic.edit import CreateView
-from products.models import Products, User,Colour,Category,Size
+from products.models import Colour,Category,Size
 from products.forms import ProductForm
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class CreateProduct(CreateView):
     def get(self,request):
         form = ProductForm()

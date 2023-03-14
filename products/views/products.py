@@ -1,9 +1,9 @@
-from django.shortcuts import render,redirect
-from products.forms import ProductForm
-from django.views.generic.edit import UpdateView
+from django.shortcuts import render
 from django.views import View
 from products.models import Products
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class UserProducts(View):
     def get(self,request):
         user = request.user
