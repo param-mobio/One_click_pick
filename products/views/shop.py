@@ -15,7 +15,7 @@ class Shop(View):
         category = Category.objects.all()
         s = request.GET.get('search')
         if s!=None:
-            search_product = products.filter(Q(name__icontains=s) | Q(company__icontains=s) | Q(category__name__icontains=s))
+            search_product = products.filter(Q(name__icontains=s) | Q(company__icontains=s) )
         else:
             search_product = Products.objects.all()
         
