@@ -59,7 +59,7 @@ class ProductadminRegister(CreateView):
     def get(self,request):
         form = Registerform()
         Groups = Group.objects.all()
-        print(Groups)
+    
         context = {
             'form': form,
         }

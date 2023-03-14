@@ -1,6 +1,6 @@
 from django.urls import path,include
 from products.views import index,createproduct,products,updateproduct,deleteproduct,shop,new,details
-from authentication.views import logout,login
+from authentication.views import logout
 urlpatterns = [
     path('index/',index.Index.as_view(),name ='index'),
     path('createproduct/',createproduct.CreateProduct.as_view(), name='createproduct'),

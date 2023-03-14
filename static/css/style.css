@@ -156,6 +156,10 @@ sub {
 sup {
   top: -.5em;
 }
+#profileimg{
+  height: 50px;
+  width: 50px;
+}
 
 a {
   color: #D19C97;
