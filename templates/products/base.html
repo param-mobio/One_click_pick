@@ -57,8 +57,8 @@
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
-                <a href="{% url 'pprofile' user.id %}">
-                    <img src="{{request.user.profile.url}}" class="rounded-0 border border-5 text-primary" id="profileimg" alt="">
+                <a href="{% url 'pprofile' user.id %}" class="rounded-0 border border-5 text-primary">
+                    <img src="{{request.user.profile.url}}" class="rounded-5  text-primary" id="profileimg" alt="">
                 </a>
             </div>
         </div>

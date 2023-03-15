@@ -202,7 +202,7 @@ EMAIL_HOST_USER = 'paramt.mobio@gmail.com'
 EMAIL_HOST_PASSWORD = 'gfjmedjhdnwziqqc'
 
 LOGIN_URL = '/account/login'
-LOGIN_REDIRECT_URL = '/account/profile'
+LOGIN_REDIRECT_URL = '/products/index'
 LOGOUT_URL = '/account/logout'
 LOGOUT_REDIRECT_URL = '/account/login'
 # SOCIALACCOUNT_LOGIN_ON_GET=True

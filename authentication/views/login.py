@@ -40,7 +40,7 @@ class Login(View):
             messages.error(request,'no user found')
         return render(request, self.template_name)
     
-class Profile(View):
-    def get(self,request):
-        return render(request,'account/profile.html')
+# class Profile(View):
+#     def get(self,request):
+#         return render(request,'products/index.html')
 

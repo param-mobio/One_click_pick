@@ -27,7 +27,9 @@
                         <img src="{{request.user.profile.url}}" class="h-100 w-100"  alt="">
                         {{form.profile.label}}
                         {% render_field form.profile class="form-control mb-3" required="true" %}
+                        
                     </div>
+                    <a href="{% url 'resetpassword' %}" class="btn btn-primary mt-3">Change Password</a>
                 </div>
                 <div class="col-md-8 col-lg-8">
                     {{form.first_name.label}}
@@ -40,7 +42,7 @@
                     {% render_field form.phone class="form-control mb-3" required="true" %}
                     {{form.address.label}}
                     {% render_field form.address class="form-control mb-3" required="true" %}
-                    
+
                 </div>
             </div>
             <input class="btn btn-primary py-2 px-4" type="submit" name="submit">

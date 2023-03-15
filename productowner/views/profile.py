@@ -22,7 +22,6 @@ class ProductOwnerProfile(View):
             # user = form.save(commit=False)
             address = form.cleaned_data.get('address')
             profile = form.cleaned_data.get('profile')
-            email = form.cleaned_data.get('email')
             # print(email)
             user.address = address
             user.profile = profile
