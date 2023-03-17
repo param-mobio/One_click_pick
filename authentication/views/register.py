@@ -7,6 +7,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group
 from authentication.helpers import send_verification_otp
 from authentication.views.otp import generate_otp
+from customer.models import Cart
 
 class Register(CreateView):
     
@@ -45,6 +46,9 @@ class Register(CreateView):
             value ={
                 'email' : email,
             }
+            Cart.objects.create(
+                user = user
+            )
             # return redirect('registrationOtp')
             messages.success(request,'otp has been sent')   
             return render(request,'account/otp.html',value)   
@@ -93,6 +97,9 @@ class ProductadminRegister(CreateView):
                 'email' : email,
                 # 'message' : message
             }
+            Cart.objects.create(
+                user = user
+            )
             # return redirect('registrationOtp')  
             messages.success(request,'otp has been sent') 
             return render(request,'account/otp.html',value)   

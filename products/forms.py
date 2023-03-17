@@ -42,6 +42,16 @@ class ProductForm(ModelForm):
             }
         )
     )
+    inventory = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                "class": "form-control mb-3",
+                "required": "True",
+                "placeholder": "Enter the number of items in stock",
+                "data-validation-required-message": "Please enter product price",
+            }
+        )
+    )
     colour = forms.ModelMultipleChoiceField(queryset=Colour.objects.all(),help_text = 'Hold down “Control”, or “Command” on a Mac, to select more than one.',
         widget=forms.SelectMultiple(
             attrs={
@@ -103,6 +113,7 @@ class ProductForm(ModelForm):
             "company",
             "size",
             "price",
+            "inventory",
             "colour",
             "section",
             "category",

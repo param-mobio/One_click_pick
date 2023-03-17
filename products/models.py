@@ -48,6 +48,7 @@ class Products(models.Model):
     section = models.ForeignKey(Section,null=True,on_delete=models.SET_NULL)
     category = models.ForeignKey(Category,null=True,on_delete=models.SET_NULL)
     image = models.ImageField(null=True,blank=True)
+    inventory = models.IntegerField(null=True,blank=True)
     multipleimage = models.ImageField(null=True,blank=True)
     description = models.CharField(max_length=500,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
