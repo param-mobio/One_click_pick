@@ -5,7 +5,7 @@ from products.models import Products
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,related_name='user.cart+')
     # quantity = models.IntegerField(null=True)
-    total_price = models.FloatField(null=True)
+    total_price = models.DecimalField(null=True,decimal_places=2,max_digits=10)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     created_by=models.ForeignKey(User, null=True,blank=True,related_name='user.cart.created_by+',on_delete=models.SET_NULL)
@@ -22,6 +22,7 @@ class CartItem(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     created_by=models.ForeignKey(User, null=True,blank=True,related_name='user.cartitem.created_by+',on_delete=models.SET_NULL)
     update_by=models.ForeignKey(User,max_length=200, null=True,related_name='user.cartitem.updated_by+' ,blank=True,on_delete=models.SET_NULL)
+
 
     def __str__(self):
         return self.product.name

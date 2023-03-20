@@ -47,15 +47,11 @@
                     </div>
                 </form>
             </div>
-            
+            {{request.user.id.cart_set.id}}
             <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span class="badge">0</span>
-                </a>
-                <a href="" class="btn border">
+                <a href="{% url 'showcart' user.id %}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <span>{{user.cart_set.id}}</span>
                 </a>
                 {% if user.groups.all.0.name == 'product_admin' %}
                 <a href="{% url 'pprofile' user.id %}" class="rounded-0 border border-5 text-primary">

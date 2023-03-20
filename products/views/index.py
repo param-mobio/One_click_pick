@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from products.models import Products,Category,Section
 
+
 class Index(View):
     def get(self,request):
        section = Section.objects.all()

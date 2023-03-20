@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 class DeleteProduct(DeleteView):
     def get(self,request,pk):
         products = Products.objects.get(id=pk)  
-        print(products)
         products.delete()
         messages.success(request,'Product has been deleted successfully ')
         return redirect('products')

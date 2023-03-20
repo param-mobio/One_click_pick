@@ -22,3 +22,9 @@ def my_url(value,field_name,urlencode=None):
 def to_str(value):
     """converts int to string"""
     return str(value)
+
+@register.simple_tag()
+def multiply(qty, unit_price):
+    total  = qty * unit_price
+    # you would need to do any localization of the result here
+    return total
