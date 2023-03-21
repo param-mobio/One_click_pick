@@ -35,7 +35,6 @@ class ShowCart(View):
         cartitemid = request.POST.get('cartitem')
         remove = request.POST.get('remove')
         count = CartItem.objects.filter(cart=cart).count()
-        print(count)
         if cartitemid:
             cartitemquant = CartItem.objects.get(id=cartitemid)
             if remove:
@@ -47,11 +46,13 @@ class ShowCart(View):
                 
             cartitemquant.save()
         total = 0
+        if cartitemquant.quantity == 0:
+            cartitemquant.delete()
+        
         for c in cartitem:
             total += (c.quantity * c.product.price)
         cart.total_price = total
         cart.save()
-        print(total)
         context = {
             'cartitem' : cartitem,
             'cart':cart,

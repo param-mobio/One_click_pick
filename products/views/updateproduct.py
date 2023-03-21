@@ -30,29 +30,29 @@ class UpdateProduct(UpdateView):
         if input_color:
             if Colour.objects.filter(name = input_color).exists():
                 messages.error(request,'color is already exists')
-                # return redirect('products')
+                return HttpResponseRedirect(reverse('updateproduct',args=[products.id]))
             else:
                 Colour.objects.create(name=input_color)
                 messages.success(request,'color is added successfully')
-                # return redirect('products')
+                return HttpResponseRedirect(reverse('updateproduct',args=[products.id]))
         input_category = request.POST.get('addcategory')
         if input_category:
             if Category.objects.filter(name = input_category).exists():
                 messages.error(request,'category is already exists')
-                return redirect('products')
+                return HttpResponseRedirect(reverse('updateproduct',args=[products.id]))
             else:
                 Category.objects.create(name=input_category)
                 messages.success(request,'category is added successfully')
-                return redirect('products')
+                return HttpResponseRedirect(reverse('updateproduct',args=[products.id]))
         input_size = request.POST.get('addsize')
         if input_size:
             if Size.objects.filter(name = input_size).exists():
                 messages.error(request,'size is already exists')
-                return redirect('products')
+                return HttpResponseRedirect(reverse('updateproduct',args=[products.id]))
             else:
                 Size.objects.create(name=input_size)
                 messages.success(request,'size is added successfully')
-                return redirect('products')
+                return HttpResponseRedirect(reverse('updateproduct',args=[products.id]))
             
         user = request.user
         if form.is_valid():

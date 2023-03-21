@@ -14,7 +14,6 @@ class Deletecartitem(DeleteView):
     def get(self,request,pk):
         user = request.user
         id  = str(user.id)
-        # print(id)
         cartitem = CartItem.objects.get(id=pk)
         cartitem.delete()
         messages.success(request,'Product has been removed successfully')
