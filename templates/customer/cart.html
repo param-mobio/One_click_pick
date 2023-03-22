@@ -3,6 +3,11 @@
 {% load custom_tag %}
 {% load widget_tweaks %}
 {% block content %}
+{% if cartitem.count == 0 %}
+    <div class="backgroundimage">
+        
+    </div>
+{% else %}
 <div class="container-fluid pt-5">
     {% for message in messages  %}
     <div class="alert {{message.tags}} alert-dismissible" role="alert">
@@ -10,6 +15,7 @@
         <strong>{{message}}</strong>
     </div>
     {% endfor %}
+    
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
             <table class="table table-bordered text-center mb-0">
@@ -61,7 +67,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel{{c.id}}">Are you sure Want to Remove item from cart{{c.id}} </h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel{{c.id}}">Are you sure Want to Remove item from cart </h1>
 
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
@@ -95,11 +101,12 @@
                         <h5 class="font-weight-bold">Total</h5>
                         <h5 class="font-weight-bold">Rs.{{cart.total_price}}</h5>
                     </div>
-                    <a href="{% url "checkout" request.user.id %}" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+                    <a href="{% url "checkout" cart.id %}" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endif %}
 <!-- Cart End -->
 {% endblock %}

@@ -2391,7 +2391,9 @@ fieldset:disabled a.btn {
   border-color: #c17a74;
   box-shadow: 0 0 0 0.2rem rgba(183, 138, 135, 0.5);
 }
-
+.orderimage {
+  height: 200px;
+}
 .btn-primary.disabled, .btn-primary:disabled {
   color: #212529;
   background-color: #D19C97;
@@ -2408,6 +2410,14 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(183, 138, 135, 0.5);
+} 
+
+.backgroundimage {
+  background-image: url("/static/images/emptycart.png");
+  height: 1200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .btn-secondary {

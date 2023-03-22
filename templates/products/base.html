@@ -16,7 +16,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
@@ -49,11 +49,20 @@
             </div>
             {{request.user.id.cart_set.id}}
             <div class="col-lg-3 col-6 text-right">
+                
+                <a href="{% url 'order' user.id %}" class="btn border">
+                    <i class="bi bi-bag-check-fill text-primary"></i>
+                    <span>{{user.cart_set.id}}</span>
+                </a>
                 <a href="{% url 'showcart' user.id %}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span>{{user.cart_set.id}}</span>
                 </a>
                 {% if user.groups.all.0.name == 'product_admin' %}
+                <a href="{% url 'ownerorder' user.id %}" class="btn border">
+                    <i class="bi bi-bag-check-fill text-primary"></i>
+                    <span>{{user.cart_set.id}}</span>
+                </a>
                 <a href="{% url 'pprofile' user.id %}" class="rounded-0 border border-5 text-primary">
                     <img src="{{request.user.profile.url}}" class="rounded-5  text-primary" id="profileimg" alt="">
                 </a>

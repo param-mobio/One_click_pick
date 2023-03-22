@@ -14,7 +14,7 @@ class ShowCart(View):
         user = User.objects.get(id=pk)
         carts = Cart.objects.get(user=user)
         cartitem = CartItem.objects.filter(cart=carts)
-        count = CartItem.objects.filter(cart=carts).count() 
+        
         u = carts.user
         # print(count)
         # print(user.cart_set.all())
@@ -31,7 +31,7 @@ class ShowCart(View):
         context = {
             'cartitem' : cartitem,
             'cart':carts,
-            'count':count,
+            
         }
         
         return render(request,'customer/cart.html',context)
