@@ -9,6 +9,7 @@ from django.contrib import messages
 @method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class ProductOwnerProfile(View):
     def get(self,request,pk): 
+        print(pk)
         user = User.objects.get(id = pk)
         form = ProfileForm(instance=user)
         context = {

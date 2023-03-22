@@ -12,18 +12,25 @@ from django.views.decorators.csrf import csrf_protect
 class ShowCart(View):
     def get(self,request,pk):
         user = User.objects.get(id=pk)
-        cart = Cart.objects.get(user=user)
-        cartitem = CartItem.objects.filter(cart=cart)
-        count = CartItem.objects.filter(cart=cart).count()   
+        carts = Cart.objects.get(user=user)
+        cartitem = CartItem.objects.filter(cart=carts)
+        count = CartItem.objects.filter(cart=carts).count() 
+        u = carts.user
+        # print(count)
+        # print(user.cart_set.all())
+        # print(user)  
+        # c = u.cart_set.all()
+        # print(c)
+        
         # count = user.cart_set.get()
         
         total = 0
         for c in cartitem:
             total += c.quantity * c.product.price
-        cart.total_price = total
+        carts.total_price = total
         context = {
             'cartitem' : cartitem,
-            'cart':cart,
+            'cart':carts,
             'count':count,
         }
         

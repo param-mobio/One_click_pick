@@ -1,0 +1,50 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    
+    <h1 class="mb-4 display-5 font-weight-semi-bold" >{{name}}</h1>
+    
+            <div class="contact-form">
+                <div id="success"></div>
+                {% for message in messages  %}
+                <div class="alert {{message.tags}} alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <strong>{{message}}</strong>
+                </div>
+                {% endfor %}
+                <form  action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {% if field.errors %}
+    
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                        <strong>{{field.errors}}</strong>
+                    </div>  
+                    {% endif %}
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            {{form.first_name.label}}
+                            {% render_field form.first_name class="form-control mb-3" required="true" %}         
+                            {{form.last_name.label}}
+                            {% render_field form.last_name class="form-control mb-3" required="true" %}
+                            {{form.phone.label}}
+                            {% render_field form.phone class="form-control mb-3" required="true" %}
+                            {{form.email.label}}
+                            {% render_field form.email class="form-control mb-3" required="true" %}
+                            {{form.address1.label}}
+                            {% render_field form.address1 class="form-control mb-3" required="true" %}
+                            {{form.address2.label}}
+                            {% render_field form.address2 class="form-control mb-3" required="true" %}
+                            <input type="text" name="created_by" value="{{request.user}}" class="form-control mb-3" required="" data-validation-required-message="Please enter your name" disabled="True" id="id_created_by">
+                        </div>
+                        
+                    </div>
+                    <input class="btn btn-primary py-2 px-4" type="submit" value="Place Order" name="submit">
+                </form>
+            </div>
+</div>
+{% endblock %}
