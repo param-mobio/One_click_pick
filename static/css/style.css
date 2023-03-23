@@ -2399,7 +2399,15 @@ fieldset:disabled a.btn {
   background-color: #D19C97;
   border-color: #D19C97;
 }
+.colorcircle{
+  height: 25px;
+  width: 25px;
+  border-style: solid;
+  border-radius: 50%;
+  background-color: red;
+  display: inline-block;
 
+}
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;

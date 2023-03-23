@@ -6,12 +6,11 @@ from order.models import Order, OrderItem
 class Orders(View):
     def get(self,request,pk):
         user = User.objects.get(id=pk)
-        order = Order.objects.filter(user=user)
+        order = Order.objects.filter(user=user).order_by('-id')
         orderitem = OrderItem.objects.filter(order__in =order)
         context = {
             'order' : order,
             'orderitem' : orderitem
         }
         return render(request,'order/order.html',context)
-    def post(self,request,pk):
-        return render(request,'order/order.html')
+    

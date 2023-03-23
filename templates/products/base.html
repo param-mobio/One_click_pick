@@ -60,7 +60,7 @@
                 </a>
                 {% if user.groups.all.0.name == 'product_admin' %}
                 <a href="{% url 'ownerorder' user.id %}" class="btn border">
-                    <i class="bi bi-bag-check-fill text-primary"></i>
+                    <img src="{% static 'images/order-delivery.png' %}" alt="" style="width: 16px; height: 16px;">
                     <span>{{user.cart_set.id}}</span>
                 </a>
                 <a href="{% url 'pprofile' user.id %}" class="rounded-0 border border-5 text-primary">

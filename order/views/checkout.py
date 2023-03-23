@@ -4,6 +4,12 @@ from django.views import View
 from user.models import User
 from customer.models import Cart, CartItem
 from order.models import Order, OrderItem
+from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
+from order.views import razorpay
 
 
 class Checkout(View):
@@ -28,7 +34,20 @@ class Checkout(View):
                 orderitem = OrderItem(product = i.product, order = order,size =i.size, colour=i.colour,quantity=i.quantity)
                 orderitem.save()    
             
-            cartitem.delete()
+            # cartitem.delete()
+            dict = {
+                'cartitem' : cartitem,
+                'order' : order,
+                
+            }
+            html_template = 'order/orderemail.html'
+            html_message = render_to_string(html_template,context=dict)
+            subject = 'Order is successfully placed'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [order.user]
+            messages = EmailMessage(subject, html_message, email_from, recipient_list)
+            messages.content_subtype = 'html'
+            messages.send()
         context = {
             'form':form,
         }

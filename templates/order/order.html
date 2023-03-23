@@ -21,7 +21,13 @@
                         <div class="col-lg-5 col-md-5">
                             <h4>{{oi.product.name}}</h4>
                             <p><b>Size: {{oi.size}}</b></p>
-                            <p><b>Color: {{oi.colour}}</b></p>
+                            <p>Color: <span style = "height: 16px;
+                                width: 16px;
+                                border-radius: 50%;
+                                background-color: {{oi.colour}};
+                                display: inline-block;
+                                "></span>
+                            {{oi.colour}}</p>
                             <p><b>Qty: {{oi.quantity}}</b></p>
                             
                             <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">

@@ -31,10 +31,14 @@
                             
                             <span>
                                 <select name = "status"  class="form-select" aria-label="Default select example">
-                                    <option selected>Status</option>
-                                    <option value="25">Pending</option>
-                                    <option value="70">Out for Delivary</option>
-                                    <option value="100">Delivered</option>
+                                    <option {% if oi.status == ' ' %} selected
+                                    {% endif %} selected>Status</option>
+                                    <option {% if oi.status == '25' %} selected
+                                    {% endif %}value="25">Pending</option>
+                                    <option {% if oi.status == '70' %} selected
+                                    {% endif %} value="70">Out for Delivary</option>
+                                    <option {% if oi.status == '100' %} selected
+                                    {% endif %} value="100">Delivered</option>
                                 </select>
                                 <input type="text" value="{{oi.id}}" name="id" hidden>
                                 <input class="btn btn-dark" type="submit" value="Apply">
