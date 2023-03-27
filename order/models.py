@@ -12,6 +12,8 @@ class Order(models.Model):
     email = models.EmailField(null=True)
     address1 = models.CharField(max_length=20,null=True,blank=True)
     address2 = models.CharField(max_length=20,null=True,blank=True)
+    paid = models.BooleanField(default=False)
+    payment_id = models.CharField(max_length=500,null=True,blank=True)
     total_price = models.DecimalField(null=True,decimal_places=2,max_digits=10)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

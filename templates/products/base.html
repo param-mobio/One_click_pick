@@ -52,22 +52,22 @@
                 
                 <a href="{% url 'order' user.id %}" class="btn border">
                     <i class="bi bi-bag-check-fill text-primary"></i>
-                    <span>{{user.cart_set.id}}</span>
+                    
                 </a>
                 <a href="{% url 'showcart' user.id %}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span>{{user.cart_set.id}}</span>
+                   
                 </a>
                 {% if user.groups.all.0.name == 'product_admin' %}
                 <a href="{% url 'ownerorder' user.id %}" class="btn border">
                     <img src="{% static 'images/order-delivery.png' %}" alt="" style="width: 16px; height: 16px;">
-                    <span>{{user.cart_set.id}}</span>
+                    
                 </a>
                 <a href="{% url 'pprofile' user.id %}" class="rounded-0 border border-5 text-primary">
                     <img src="{{request.user.profile.url}}" class="rounded-5  text-primary" id="profileimg" alt="">
                 </a>
                 {% else %}
-                 <a href="{% url 'cprofile' user.id %}" class="rounded-0 border border-5 text-primary">
+                 <a href="{% url 'cprofile' request.user.id %}" class="rounded-0 border border-5 text-primary">
                     <img src="{{request.user.profile.url}}" class="rounded-5  text-primary" id="profileimg" alt="">
                 </a> 
                 {% endif %} 

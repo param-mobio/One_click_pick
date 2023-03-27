@@ -4,8 +4,9 @@ from django.views.generic.edit import UpdateView
 from products.models import Products,Colour,Category,Size
 from products.forms import ProductForm
 from django.contrib import messages
-from django.utils.decorators import method_decorator
+from django.utils.decorators import method_decorator    
 from django.contrib.auth.decorators import login_required
+
 @method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class UpdateProduct(UpdateView):
     def get(self,request,pk):
