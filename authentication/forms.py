@@ -65,7 +65,6 @@ class Registerform(ModelForm):
             
     def clean_phone(self):
         phone = self.cleaned_data['phone']
-        print(phone)
         if(len(phone)==10):
             return phone 
         else:

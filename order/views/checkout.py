@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,HttpResponseRedirect
 from order.forms import OrderForm
 from django.views import View
+from django.urls import reverse
+from django.http import HttpResponse
 from user.models import User
 from customer.models import Cart, CartItem
 from order.models import Order, OrderItem
@@ -9,7 +11,7 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
-from order.views import razorpay
+
 
 
 class Checkout(View):
@@ -33,12 +35,10 @@ class Checkout(View):
             for i in cartitem:
                 orderitem = OrderItem(product = i.product, order = order,size =i.size, colour=i.colour,quantity=i.quantity)
                 orderitem.save()    
-            
             # cartitem.delete()
             dict = {
                 'cartitem' : cartitem,
-                'order' : order,
-                
+                'order' : order,    
             }
             html_template = 'order/orderemail.html'
             html_message = render_to_string(html_template,context=dict)
@@ -48,7 +48,9 @@ class Checkout(View):
             messages = EmailMessage(subject, html_message, email_from, recipient_list)
             messages.content_subtype = 'html'
             messages.send()
+            return HttpResponseRedirect(reverse('payment',args=[order.id]))
         context = {
             'form':form,
+            'order':order,
         }
         return render(request,'order/checkout.html',context)

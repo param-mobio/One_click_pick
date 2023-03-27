@@ -26,8 +26,9 @@ class ShowCart(View):
         
         total = 0
         for c in cartitem:
-            total += c.quantity * c.product.price
+            total += (c.quantity * c.product.price)
         carts.total_price = total
+        carts.save()
         context = {
             'cartitem' : cartitem,
             'cart':carts,

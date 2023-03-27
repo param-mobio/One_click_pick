@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 {% load custom_tag %}
 {% block content %}
-
+{% csrf_token %}
 <div class="container">
     {% for o in order  %}       
     <div class="container border border-5 rounded mt-5 mb-4 shadow ">
