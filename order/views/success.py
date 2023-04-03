@@ -7,7 +7,10 @@ from django.utils.decorators import method_decorator
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
 class Success(View):
     def post(self,request,pk):

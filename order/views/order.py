@@ -4,8 +4,10 @@ from user.models import User
 from order.models import Order, OrderItem
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class Orders(View):
     def get(self,request,pk):
         user = User.objects.get(id=pk)

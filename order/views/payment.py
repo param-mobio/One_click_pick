@@ -8,6 +8,10 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 import razorpay
 
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class Payment(View):
     def get(self,request,pk):    
         order = Order.objects.get(id = pk)

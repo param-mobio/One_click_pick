@@ -6,7 +6,10 @@ from order.models import Order, OrderItem
 from django.views.generic.edit import UpdateView
 from customer.models import Cart
 from order.forms import OrderForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class Updatedetails(UpdateView):
     def get(self,request,pk):
         cart = Cart.objects.get(id=pk)

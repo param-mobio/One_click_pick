@@ -5,9 +5,10 @@ from django.urls import reverse
 from customer.models import Cart, CartItem
 from order.models import  OrderItem
 from django.shortcuts import  render
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
-
-
+@method_decorator(login_required(login_url='/account/login'), name='dispatch')
 class Checkout(View):
     def get(self,request,pk):
         cart  = Cart.objects.get(id = pk)

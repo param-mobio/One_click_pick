@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from django.views import View
 from products.models import Products,Category,Size
 from django.core.paginator import Paginator
@@ -26,7 +26,6 @@ class Shop(View):
                 size_product = Products.objects.all()
             else:
                 si = Size.objects.filter(name__in=size)
-                print(si)
                 size_product = Products.objects.filter(size__in=si)
         else:
             size_product = Products.objects.all()
@@ -51,7 +50,8 @@ class Shop(View):
             'category_filter' : category_filter,
             'section_filter' : section_filter,
             's' : s,
-            'size' : sizes,
+            'sizes' : sizes,
+            'size' : size,
         }
         # con['size'] = product.get_size_display()
         return render(request,'products/shop.html',context)
