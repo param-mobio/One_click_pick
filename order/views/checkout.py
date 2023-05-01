@@ -34,6 +34,6 @@ class Checkout(View):
             return HttpResponseRedirect(reverse('payment',args=[order.id]))
         context = {
             'form':form,
-            'order':order,
+            'order':order
         }
         return render(request,'order/checkout.html',context)

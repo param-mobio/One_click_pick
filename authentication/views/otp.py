@@ -9,7 +9,7 @@ import random
 
 
 def generate_otp():
-    digits = "0123456789"
+    digits = "123456789"
     otp = ""
     i=0
     for i in range(4): 

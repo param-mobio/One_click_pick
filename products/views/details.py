@@ -26,7 +26,6 @@ class Details(View):
         products = Products.objects.get(id=pk)
         # cartitem = CartItem.objects.filter(product=products).values_list('product', flat=True)
         cartitem = CartItem.objects.filter(product=products)
-        print(cartitem)
         user = request.user
         cart = Cart.objects.get(user = user)
         clothsize = request.POST['clothsize']
@@ -44,10 +43,9 @@ class Details(View):
                     if i.size == clothsize and i.colour == clothcolor:
                         count+=1
                         return JsonResponse({"message":"product is already in cart"})
-        count=0
-        print(count)            
+        count=0           
         if count == 0:
-            ci = CartItem(cart=cart,product=products,size=clothsize,colour=clothcolor,quantity=quantity)
+            # ci = CartItem(cart=cart,product=products,size=clothsize,colour=clothcolor,quantity=quantity)
             ci = CartItem.objects.create(
                 cart = cart,
                 product = products,
